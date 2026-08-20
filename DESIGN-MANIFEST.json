@@ -161,7 +161,7 @@
       "low_ring.png",
       "mark_yes-1.png",
       "mark_yes.png",
-      "markszabo-portfolio.html",
+      "index.html",
       "preview.png",
       "robots-preview.png",
       "robots.html",
@@ -224,7 +224,7 @@
       "cities.html",
       "contact.html",
       "hk-aerial.html",
-      "markszabo-portfolio.html",
+      "index.html",
       "robots.html",
       "rune-sword.html",
       "sci-fi-weapon.html",
@@ -465,7 +465,7 @@
       "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
     },
     {
-      "file": "markszabo-portfolio.html",
+      "file": "index.html",
       "role": "screen",
       "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
     },

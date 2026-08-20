@@ -68,7 +68,7 @@ For responsive web exports, treat these as a modern breakpoint system for one ad
 - `cities.html`
 - `contact.html`
 - `hk-aerial.html`
-- `markszabo-portfolio.html`
+- `index.html`
 - `robots.html`
 - `rune-sword.html`
 - `sci-fi-weapon.html`
