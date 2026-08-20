@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Márk Szabó · 3D Artist</title>
+<meta name="description" content="Selected projects by Márk Szabó — AAA environment and hard surface work for games.">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:oklch(0.146 0 0);
+  --surface:oklch(0.175 0 0);
+  --fg:oklch(0.95 0 0);
+  --muted:oklch(0.66 0 0);
+  --border:oklch(0.26 0 0);
+  --accent:oklch(0.565 0.208 27);
+  --accent-soft:oklch(0.68 0.19 27);
+  --font-display:"Space Grotesk","Segoe UI",Arial,sans-serif;
+  --font-body:"Inter","Segoe UI",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#0b0b0b}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+#contact{scroll-margin-top:96px}
+
+/* ---------- Cinematic page transition ---------- */
+@view-transition{navigation:auto}
+::view-transition-root{background:oklch(0.146 0 0)}
+::view-transition-old(root){animation:vt-out .4s cubic-bezier(.3,.6,.2,1) both}
+::view-transition-new(root){animation:vt-in .4s cubic-bezier(.3,.6,.2,1) both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-8px) scale(.992)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(12px) scale(.992)}}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.01ms}
+}
+
+.container{max-width:1520px;margin:0 auto;padding:0 clamp(24px,4vw,72px)}
+
+/* ---------- Navigation ---------- */
+.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border)}
+.nav-inner{height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-brand{display:flex;align-items:center;gap:14px;padding:6px 0}
+.nav-mark{width:9px;height:9px;background:var(--accent);flex:none}
+.nav-mark::after{content:"";display:block;width:17px;height:17px;margin:-4px 0 0 -4px;border:1px solid var(--accent);opacity:.45}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.2}
+.nav-name{font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.045em}
+.nav-role{font-family:var(--font-display);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.26em;color:var(--muted);margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:clamp(20px,3vw,46px);margin:0 auto}
+.nav-link{position:relative;font-family:var(--font-display);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:12px 2px;transition:color .3s cubic-bezier(.2,.65,.2,1)}
+.nav-link:hover{color:var(--fg)}
+.nav-link.is-active{color:var(--fg);text-shadow:0 0 14px oklch(0.95 0 0 / 0.32)}
+.nav-link.is-active::after{content:"";position:absolute;left:2px;right:2px;bottom:4px;height:2px;background:var(--fg)}
+
+/* ---------- Page header ---------- */
+.work-header{padding:104px 0 64px}
+.kicker{font-family:var(--font-display);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.4em;color:var(--accent-soft);margin-bottom:22px}
+.work-title{font-family:var(--font-display);font-weight:600;font-size:clamp(38px,4.6vw,60px);line-height:1.1;letter-spacing:-.02em;margin-bottom:18px}
+.work-meta{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap}
+.work-intro{font-size:15px;line-height:1.7;color:var(--muted);max-width:56ch}
+.work-count{font-family:var(--font-display);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.24em;color:var(--muted);margin-left:auto}
+
+/* ---------- Project groups ---------- */
+.work-index{padding:8px 0 128px}
+.project-group{padding:0 0 104px}
+.project-group:last-child{padding-bottom:0}
+.group-head{display:flex;align-items:baseline;gap:18px;margin-bottom:26px}
+.group-index{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.22em;color:var(--accent-soft);flex:none}
+.group-title{font-family:var(--font-display);font-weight:600;font-size:clamp(24px,2.6vw,34px);line-height:1.15;letter-spacing:-.01em}
+.group-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.group-thumb{position:relative;display:block;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--border);border-radius:12px;background:var(--surface);cursor:pointer;transition:border-color .3s ease-in-out}
+.group-thumb img{width:100%;height:100%;object-fit:cover;object-position:center center;transition:transform .3s ease-in-out,filter .3s ease-in-out}
+.group-thumb::after{content:"";position:absolute;inset:0;z-index:1;background:oklch(0.02 0 0 / 0.45);opacity:0;transition:opacity .3s ease-in-out;pointer-events:none}
+.group-thumb::before{content:"View Project →";position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--fg);opacity:0;transition:opacity .3s ease-in-out;pointer-events:none}
+.group-thumb:hover{border-color:var(--fg)}
+.group-thumb:hover img{transform:scale(1.04);filter:brightness(1.07)}
+.group-thumb:hover::after{opacity:1}
+.group-thumb:hover::before{opacity:1}
+.group-hero{grid-column:1/-1}
+
+/* ---------- Scroll reveal ---------- */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
+.js .reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+
+/* ---------- Footer ---------- */
+.footer{border-top:1px solid var(--border);padding:26px 0 30px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px;letter-spacing:.03em;color:var(--muted)}
+.footer-inner strong{font-weight:600;color:var(--fg);letter-spacing:.06em}
+.footer-tag{font-family:var(--font-display);font-size:10px;text-transform:uppercase;letter-spacing:.24em}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1120px){
+  .work-header{padding:80px 0 48px}
+  .group-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .project-group{padding-bottom:88px}
+  .work-index{padding-bottom:100px}
+}
+@media (max-width:680px){
+  .nav-inner{height:auto;flex-wrap:wrap;padding:14px 0 12px;row-gap:8px}
+  .nav-links{order:3;width:100%;justify-content:center;gap:30px}
+  .work-header{padding:64px 0 40px}
+  .group-grid{grid-template-columns:1fr;gap:16px}
+  .group-head{gap:12px;margin-bottom:20px}
+  .project-group{padding-bottom:72px}
+  .work-index{padding-bottom:80px}
+  .work-count{margin-left:0}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" data-od-id="nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="markszabo-portfolio.html" data-od-id="nav-brand">
+      <span class="nav-mark" aria-hidden="true"></span>
+      <span class="nav-brand-text">
+        <span class="nav-name">MÁRK SZABÓ</span>
+        <span class="nav-role">3D Artist</span>
+      </span>
+    </a>
+    <div class="nav-links" data-od-id="nav-links">
+      <a class="nav-link" href="markszabo-portfolio.html" data-od-id="nav-link-home">Home</a>
+      <a class="nav-link is-active" href="work.html" data-od-id="nav-link-work">Work</a>
+      <a class="nav-link" href="markszabo-portfolio.html#about" data-od-id="nav-link-about">About</a>
+      <a class="nav-link" href="contact.html" data-od-id="nav-link-contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page header -->
+<header class="work-header" data-od-id="work-header">
+  <div class="container">
+    <p class="kicker" data-od-id="work-kicker">Work</p>
+    <h1 class="work-title" data-od-id="work-title">Selected Projects</h1>
+    <div class="work-meta">
+      <p class="work-intro" data-od-id="work-intro">Environments, vehicles, weapons and modular hard-surface assets — every group opens with a beauty render, followed by supporting presentation images.</p>
+      <p class="work-count" data-od-id="work-count">08 Projects</p>
+    </div>
+  </div>
+</header>
+
+<!-- Project groups -->
+<main class="work-index" data-od-id="work-index">
+  <div class="container">
+
+    <section class="project-group reveal" data-od-id="group-hk-aircraft">
+      <div class="group-head">
+        <span class="group-index" data-od-id="group-hk-aircraft-index">01</span>
+        <h2 class="group-title" data-od-id="group-hk-aircraft-title">HK Aircraft</h2>
+      </div>
+      <div class="group-grid">
+        <a class="group-thumb group-hero" href="hk-aerial.html" data-od-id="hk-aircraft-hero">
+          <img src="assets/hk-aerial/textured-01.jpg" alt="HK Aircraft — beauty render">
+        </a>
+        <a class="group-thumb" href="hk-aerial.html" data-od-id="hk-aircraft-thumb-1">
+          <img src="assets/hk-aerial/textured-02.jpg" alt="HK Aircraft — presentation render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="hk-aerial.html" data-od-id="hk-aircraft-thumb-2">
+          <img src="assets/hk-aerial/clay-01.jpg" alt="HK Aircraft — clay render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="hk-aerial.html" data-od-id="hk-aircraft-thumb-3">
+          <img src="assets/hk-aerial/clay-02.jpg" alt="HK Aircraft — clay render" loading="lazy">
+        </a>
+      </div>
+    </section>
+
+    <section class="project-group reveal" data-od-id="group-environment-scenes">
+      <div class="group-head">
+        <span class="group-index" data-od-id="group-environment-scenes-index">02</span>
+        <h2 class="group-title" data-od-id="group-environment-scenes-title">Environment Scenes</h2>
+      </div>
+      <div class="group-grid">
+        <a class="group-thumb group-hero" href="cities.html" data-od-id="env-scenes-hero">
+          <img src="assets/cities/environment-01.jpg" alt="Environment Scenes — beauty render">
+        </a>
+        <a class="group-thumb" href="cities.html" data-od-id="env-scenes-thumb-1">
+          <img src="assets/cities/environment-02.jpg" alt="Environment Scenes — presentation render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="cities.html" data-od-id="env-scenes-thumb-2">
+          <img src="assets/cities/environment-03.jpg" alt="Environment Scenes — presentation render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="cities.html" data-od-id="env-scenes-thumb-3">
+          <img src="assets/cities/trailer-poster.jpg" alt="Environment Scenes — cinematic shot" loading="lazy">
+        </a>
+      </div>
+    </section>
+
+    <section class="project-group reveal" data-od-id="group-vehicle">
+      <div class="group-head">
+        <span class="group-index" data-od-id="group-vehicle-index">03</span>
+        <h2 class="group-title" data-od-id="group-vehicle-title">Vehicle</h2>
+      </div>
+      <div class="group-grid">
+        <a class="group-thumb group-hero" href="cars.html" data-od-id="vehicle-hero">
+          <img src="assets/cars/nocturne-textured.jpg" alt="Vehicle — beauty render">
+        </a>
+        <a class="group-thumb" href="cars.html" data-od-id="vehicle-thumb-1">
+          <img src="assets/cars/nightshade-textured.jpg" alt="Vehicle — presentation render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="cars.html" data-od-id="vehicle-thumb-2">
+          <img src="assets/cars/nocturne-solid.jpg" alt="Vehicle — solid render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="cars.html" data-od-id="vehicle-thumb-3">
+          <img src="assets/cars/nightshade-solid.jpg" alt="Vehicle — solid render" loading="lazy">
+        </a>
+      </div>
+    </section>
+
+    <section class="project-group reveal" data-od-id="group-sword">
+      <div class="group-head">
+        <span class="group-index" data-od-id="group-sword-index">04</span>
+        <h2 class="group-title" data-od-id="group-sword-title">Sword</h2>
+      </div>
+      <div class="group-grid">
+        <a class="group-thumb group-hero" href="rune-sword.html" data-od-id="sword-hero">
+          <img src="assets/rune-sword/rune-sword-01.jpg" alt="Sword — beauty render">
+        </a>
+        <a class="group-thumb" href="stone-sword.html" data-od-id="sword-thumb-1">
+          <img src="assets/stone-sword/stone-sword-01.jpg" alt="Sword — presentation render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="rune-sword.html" data-od-id="sword-thumb-2">
+          <img src="assets/rune-sword/rune-sword-02.jpg" alt="Sword — presentation render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="stone-sword.html" data-od-id="sword-thumb-3">
+          <img src="assets/stone-sword/stone-sword-02.jpg" alt="Sword — presentation render" loading="lazy">
+        </a>
+      </div>
+    </section>
+
+    <section class="project-group reveal" data-od-id="group-weapons">
+      <div class="group-head">
+        <span class="group-index" data-od-id="group-weapons-index">05</span>
+        <h2 class="group-title" data-od-id="group-weapons-title">Weapons</h2>
+      </div>
+      <div class="group-grid">
+        <a class="group-thumb group-hero" href="sci-fi-weapon.html" data-od-id="weapons-hero">
+          <img src="assets/sci-fi-weapon/assault-rifle-01.jpg" alt="Weapons — beauty render">
+        </a>
+        <a class="group-thumb" href="sci-fi-weapon.html" data-od-id="weapons-thumb-1">
+          <img src="assets/sci-fi-weapon/sniper-01.jpg" alt="Weapons — sniper presentation render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="sci-fi-weapon.html" data-od-id="weapons-thumb-2">
+          <img src="assets/sci-fi-weapon/guard-weapon-01.jpg" alt="Weapons — guard weapon presentation render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="sci-fi-weapon.html" data-od-id="weapons-thumb-3">
+          <img src="assets/sci-fi-weapon/lmg-01.jpg" alt="Weapons — LMG presentation render" loading="lazy">
+        </a>
+      </div>
+    </section>
+
+    <section class="project-group reveal" data-od-id="group-characters">
+      <div class="group-head">
+        <span class="group-index" data-od-id="group-characters-index">06</span>
+        <h2 class="group-title" data-od-id="group-characters-title">Characters</h2>
+      </div>
+      <div class="group-grid">
+        <a class="group-thumb group-hero" href="robots.html" data-od-id="characters-hero">
+          <img src="assets/robots/textured-01.jpg" alt="Characters — beauty render">
+        </a>
+        <a class="group-thumb" href="robots.html" data-od-id="characters-thumb-1">
+          <img src="assets/robots/textured-02.jpg" alt="Characters — presentation render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="robots.html" data-od-id="characters-thumb-2">
+          <img src="assets/robots/textured-03.jpg" alt="Characters — presentation render" loading="lazy">
+        </a>
+        <a class="group-thumb" href="robots.html" data-od-id="characters-thumb-3">
+          <img src="assets/robots/clay-01.jpg" alt="Characters — clay render" loading="lazy">
+        </a>
+      </div>
+    </section>
+
+    <section class="project-group reveal" data-od-id="group-modular-kit">
+      <div class="group-head">
+        <span class="group-index" data-od-id="group-modular-kit-index">07</span>
+        <h2 class="group-title" data-od-id="group-modular-kit-title">Modular Building Kit</h2>
+      </div>
+      <div class="group-grid">
+        <a class="group-thumb group-hero" href="assets.html" data-od-id="modular-kit-hero">
+          <img src="assets/assets/overview.jpg" alt="Modular Building Kit — complete asset collection">
+        </a>
+      </div>
+    </section>
+
+    <section class="project-group reveal" data-od-id="group-material-breakdowns">
+      <div class="group-head">
+        <span class="group-index" data-od-id="group-material-breakdowns-index">08</span>
+        <h2 class="group-title" data-od-id="group-material-breakdowns-title">Material &amp; Texture Breakdowns</h2>
+      </div>
+      <div class="group-grid">
+        <a class="group-thumb group-hero" href="stone-sword.html" data-od-id="material-breakdowns-hero">
+          <img src="assets/stone-sword/mat-base-color.jpg" alt="Material breakdown — base color map">
+        </a>
+        <a class="group-thumb" href="stone-sword.html" data-od-id="material-breakdowns-thumb-1">
+          <img src="assets/stone-sword/mat-normal.jpg" alt="Material breakdown — normal map" loading="lazy">
+        </a>
+        <a class="group-thumb" href="stone-sword.html" data-od-id="material-breakdowns-thumb-2">
+          <img src="assets/stone-sword/mat-roughness.jpg" alt="Material breakdown — roughness map" loading="lazy">
+        </a>
+        <a class="group-thumb" href="stone-sword.html" data-od-id="material-breakdowns-thumb-3">
+          <img src="assets/stone-sword/mat-ao.jpg" alt="Material breakdown — ambient occlusion map" loading="lazy">
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer" data-od-id="footer" id="contact">
+  <div class="container footer-inner">
+    <p>© 2026 <strong>MÁRK SZABÓ</strong> · 3D Artist</p>
+    <p class="footer-tag">Environment &amp; Hard Surface</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+var io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (en) {
+    if (en.isIntersecting) {
+      en.target.classList.add('is-visible');
+      io.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+</script>
+</body>
+</html>

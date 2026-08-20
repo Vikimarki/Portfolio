@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stone Sword — Márk Szabó · 3D Artist</title>
+<meta name="description" content="Stone Sword — a game-ready hard surface weapon asset by Márk Szabó.">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:oklch(0.146 0 0);
+  --surface:oklch(0.175 0 0);
+  --fg:oklch(0.95 0 0);
+  --muted:oklch(0.66 0 0);
+  --border:oklch(0.26 0 0);
+  --accent:oklch(0.565 0.208 27);
+  --accent-soft:oklch(0.68 0.19 27);
+  --font-display:"Space Grotesk","Segoe UI",Arial,sans-serif;
+  --font-body:"Inter","Segoe UI",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+figure{margin:0}
+::selection{background:var(--accent);color:#0b0b0b}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+#contact{scroll-margin-top:96px}
+
+/* ---------- Cinematic page transition ---------- */
+@view-transition{navigation:auto}
+::view-transition-root{background:oklch(0.146 0 0)}
+::view-transition-old(root){animation:vt-out .4s cubic-bezier(.3,.6,.2,1) both}
+::view-transition-new(root){animation:vt-in .4s cubic-bezier(.3,.6,.2,1) both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-8px) scale(.992)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(12px) scale(.992)}}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.01ms}
+}
+
+.container{max-width:1520px;margin:0 auto;padding:0 clamp(24px,4vw,72px)}
+.container-narrow{max-width:1200px;margin:0 auto;padding:0 clamp(24px,4vw,48px)}
+
+/* ---------- Navigation ---------- */
+.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border)}
+.nav-inner{height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-brand{display:flex;align-items:center;gap:14px;padding:6px 0}
+.nav-mark{width:9px;height:9px;background:var(--accent);flex:none}
+.nav-mark::after{content:"";display:block;width:17px;height:17px;margin:-4px 0 0 -4px;border:1px solid var(--accent);opacity:.45}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.2}
+.nav-name{font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.045em}
+.nav-role{font-family:var(--font-display);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.26em;color:var(--muted);margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:clamp(20px,3vw,46px);margin:0 auto}
+.nav-link{position:relative;font-family:var(--font-display);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:12px 2px;transition:color .3s cubic-bezier(.2,.65,.2,1)}
+.nav-link:hover{color:var(--fg)}
+.nav-link.is-active{color:var(--fg);text-shadow:0 0 14px oklch(0.95 0 0 / 0.32)}
+.nav-link.is-active::after{content:"";position:absolute;left:2px;right:2px;bottom:4px;height:2px;background:var(--fg)}
+.nav-actions{display:flex;align-items:center;gap:2px}
+.nav-action{display:grid;place-items:center;width:44px;height:44px;color:var(--muted);border:1px solid transparent;border-radius:2px;transition:color .25s,border-color .25s,background .25s}
+.nav-action:hover{color:var(--fg);border-color:var(--border);background:var(--surface)}
+.nav-action svg{width:17px;height:17px}
+
+/* ---------- Project header ---------- */
+.project-header{padding:104px 0 0}
+.project-back{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:42px;transition:color .25s}
+.project-back:hover{color:var(--fg)}
+.project-back svg{width:15px;height:15px;transition:transform .25s}
+.project-back:hover svg{transform:translateX(-3px)}
+.project-title{font-family:var(--font-display);font-weight:600;font-size:clamp(44px,6vw,84px);line-height:1.05;letter-spacing:-.03em}
+.project-subtitle{font-family:var(--font-display);font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.24em;color:var(--muted);margin-top:20px}
+.project-description{font-size:15px;line-height:1.75;color:var(--muted);max-width:64ch;margin-top:26px}
+
+/* ---------- Hero media ---------- */
+.hero-section{padding:72px 0 40px}
+.hero-media{width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+
+/* ---------- Media sections ---------- */
+.media-section{padding:80px 0 40px}
+.section-head{margin-bottom:36px}
+.section-title{font-family:var(--font-display);font-weight:600;font-size:clamp(26px,3vw,36px);line-height:1.15;letter-spacing:-.015em}
+.section-subtitle{font-family:var(--font-display);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.24em;color:var(--muted);margin-top:12px}
+.media-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.media-tile{position:relative;display:block;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:0;transition:border-color .3s ease-out}
+.media-tile img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease-out}
+.media-tile:hover img{transform:scale(1.03)}
+.texture-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.texture-card{display:flex;flex-direction:column}
+.texture-tile{position:relative;display:block;width:100%;aspect-ratio:1/1;overflow:hidden;border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:0;transition:border-color .3s ease-out}
+.texture-tile img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease-out}
+.texture-tile:hover img{transform:scale(1.03)}
+.texture-label{font-family:var(--font-display);font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-top:12px}
+.project-gallery-end{padding-top:80px}
+
+@media (max-width:1119px){.texture-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:819px){.texture-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- Scroll reveal ---------- */
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+
+/* ---------- Lightbox ---------- */
+.lightbox{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:oklch(0.05 0 0 / 0.9);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility 0s linear .25s}
+.lightbox.is-open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .25s ease,visibility 0s}
+.lightbox-backdrop{position:absolute;inset:0;width:100%;height:100%;z-index:1;cursor:zoom-out}
+.lightbox-stage{position:relative;z-index:2;display:grid;place-items:center}
+.lightbox-img{max-width:min(92vw,1500px);max-height:86vh;object-fit:contain;border:1px solid var(--border);border-radius:4px;background:var(--bg);opacity:0;transition:opacity .18s ease,transform .25s ease;transform:scale(.97)}
+.lightbox.is-open .lightbox-img{transform:scale(1)}
+.lightbox-btn{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:48px;height:48px;display:grid;place-items:center;color:var(--fg);border:1px solid var(--border);border-radius:4px;background:oklch(0.12 0 0 / 0.9);transition:border-color .25s,background .25s}
+.lightbox-btn:hover{border-color:var(--fg);background:oklch(0.16 0 0 / 0.92)}
+.lightbox-btn svg{width:18px;height:18px}
+.lightbox-prev{left:22px}
+.lightbox-next{right:22px}
+.lightbox-close{position:absolute;z-index:3;top:22px;right:22px;width:48px;height:48px;display:grid;place-items:center;color:var(--fg);border:1px solid var(--border);border-radius:4px;background:oklch(0.12 0 0 / 0.9);transition:border-color .25s,background .25s}
+.lightbox-close:hover{border-color:var(--fg);background:oklch(0.16 0 0 / 0.92)}
+.lightbox-close svg{width:18px;height:18px}
+.lightbox-count{position:absolute;z-index:3;right:26px;bottom:22px;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.18em;color:var(--muted)}
+
+/* ---------- Footer ---------- */
+.footer{border-top:1px solid var(--border);padding:26px 0 30px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px;letter-spacing:.03em;color:var(--muted)}
+.footer-inner strong{font-weight:600;color:var(--fg);letter-spacing:.06em}
+.footer-tag{font-family:var(--font-display);font-size:10px;text-transform:uppercase;letter-spacing:.24em}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  .project-header{padding:84px 0 0}
+  .hero-section{padding:60px 0 32px}
+  .media-section{padding:64px 0 32px}
+  .project-gallery-end{padding-top:64px}
+}
+@media (max-width:680px){
+  .nav-inner{height:auto;flex-wrap:wrap;padding:14px 0 12px;row-gap:8px}
+  .nav-links{order:3;width:100%;justify-content:center;gap:30px}
+  .nav-actions{gap:2px}
+  .project-header{padding:64px 0 0}
+  .project-back{margin-bottom:34px}
+  .project-title{font-size:clamp(40px,12vw,56px);letter-spacing:-.02em}
+  .hero-section{padding:48px 0 24px}
+  .media-section{padding:48px 0 24px}
+  .project-gallery-end{padding-top:48px}
+  .media-grid{grid-template-columns:1fr;gap:20px}
+  .texture-grid{grid-template-columns:1fr;gap:20px}
+  .lightbox-prev{left:12px}
+  .lightbox-next{right:12px}
+  .lightbox-close{top:14px;right:12px}
+  .lightbox-count{right:16px;bottom:16px}
+  .lightbox-img{max-width:90vw;max-height:80vh}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" data-od-id="nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="markszabo-portfolio.html" data-od-id="nav-brand">
+      <span class="nav-mark" aria-hidden="true"></span>
+      <span class="nav-brand-text">
+        <span class="nav-name">MÁRK SZABÓ</span>
+        <span class="nav-role">3D Artist</span>
+      </span>
+    </a>
+    <div class="nav-links" data-od-id="nav-links">
+      <a class="nav-link" href="markszabo-portfolio.html" data-od-id="nav-link-home">Home</a>
+      <a class="nav-link is-active" href="work.html" data-od-id="nav-link-work">Work</a>
+      <a class="nav-link" href="markszabo-portfolio.html#about" data-od-id="nav-link-about">About</a>
+      <a class="nav-link" href="contact.html" data-od-id="nav-link-contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Project header -->
+<header class="project-header reveal" data-od-id="project-header">
+  <div class="container">
+    <a class="project-back" href="work.html" data-od-id="back-to-work">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8H3M7 3.5L2.5 8 7 12.5"/></svg>
+      All Projects
+    </a>
+    <h1 class="project-title" data-od-id="project-title">Stone Sword</h1>
+    <p class="project-subtitle" data-od-id="project-subtitle">Game Weapon &nbsp;•&nbsp; Hard Surface &nbsp;•&nbsp; 3D Asset</p>
+    <p class="project-description" data-od-id="project-description">A weathered blade carved to read like it was pulled from the earth rather than forged — chipped stone, mossed edges and a worn grip built for a dark-fantasy production. Modelled and textured as a game-ready hard-surface asset, tuned for real-time presentation.</p>
+  </div>
+</header>
+
+<!-- Hero image -->
+<section class="hero-section reveal" data-od-id="hero-media">
+  <div class="container-narrow">
+    <img class="hero-media" data-od-id="stone-sword-hero" src="assets/stone-sword/stone-sword-01.jpg" alt="Stone Sword — hero render">
+  </div>
+</section>
+
+<!-- Textured renders -->
+<section class="media-section reveal" data-od-id="section-textured">
+  <div class="container-narrow">
+    <div class="section-head">
+      <h2 class="section-title" data-od-id="textured-title">Textured Renders</h2>
+      <p class="section-subtitle" data-od-id="textured-subtitle">Final textured presentation</p>
+    </div>
+    <div class="media-grid" data-gallery="textured" data-od-id="textured-gallery">
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/stone-sword-02.jpg" data-od-id="ss-textured-1" aria-label="Open Stone Sword textured render 1">
+        <img src="assets/stone-sword/stone-sword-02.jpg" alt="Stone Sword — textured render">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/stone-sword-03.jpg" data-od-id="ss-textured-2" aria-label="Open Stone Sword textured render 2">
+        <img src="assets/stone-sword/stone-sword-03.jpg" alt="Stone Sword — textured render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/stone-sword-04.jpg" data-od-id="ss-textured-3" aria-label="Open Stone Sword textured render 3">
+        <img src="assets/stone-sword/stone-sword-04.jpg" alt="Stone Sword — textured render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/stone-sword-05.jpg" data-od-id="ss-textured-4" aria-label="Open Stone Sword textured render 4">
+        <img src="assets/stone-sword/stone-sword-05.jpg" alt="Stone Sword — textured render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/stone-sword-06.jpg" data-od-id="ss-textured-5" aria-label="Open Stone Sword textured render 5">
+        <img src="assets/stone-sword/stone-sword-06.jpg" alt="Stone Sword — textured render" loading="lazy">
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Solid / clay renders -->
+<section class="media-section reveal" data-od-id="section-clay">
+  <div class="container-narrow">
+    <div class="section-head">
+      <h2 class="section-title" data-od-id="clay-title">Solid / Clay Renders</h2>
+      <p class="section-subtitle" data-od-id="clay-subtitle">High-poly modeling presentation</p>
+    </div>
+    <div class="media-grid" data-gallery="clay" data-od-id="clay-gallery">
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/clay-01.jpg" data-od-id="ss-clay-1" aria-label="Open Stone Sword clay render 1">
+        <img src="assets/stone-sword/clay-01.jpg" alt="Stone Sword — solid / clay render">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/clay-02.jpg" data-od-id="ss-clay-2" aria-label="Open Stone Sword clay render 2">
+        <img src="assets/stone-sword/clay-02.jpg" alt="Stone Sword — solid / clay render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/clay-03.jpg" data-od-id="ss-clay-3" aria-label="Open Stone Sword clay render 3">
+        <img src="assets/stone-sword/clay-03.jpg" alt="Stone Sword — solid / clay render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/clay-04.jpg" data-od-id="ss-clay-4" aria-label="Open Stone Sword clay render 4">
+        <img src="assets/stone-sword/clay-04.jpg" alt="Stone Sword — solid / clay render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/clay-05.jpg" data-od-id="ss-clay-5" aria-label="Open Stone Sword clay render 5">
+        <img src="assets/stone-sword/clay-05.jpg" alt="Stone Sword — solid / clay render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/clay-06.jpg" data-od-id="ss-clay-6" aria-label="Open Stone Sword clay render 6">
+        <img src="assets/stone-sword/clay-06.jpg" alt="Stone Sword — solid / clay render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/clay-07.jpg" data-od-id="ss-clay-7" aria-label="Open Stone Sword clay render 7">
+        <img src="assets/stone-sword/clay-07.jpg" alt="Stone Sword — solid / clay render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/clay-08.jpg" data-od-id="ss-clay-8" aria-label="Open Stone Sword clay render 8">
+        <img src="assets/stone-sword/clay-08.jpg" alt="Stone Sword — solid / clay render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/clay-09.jpg" data-od-id="ss-clay-9" aria-label="Open Stone Sword clay render 9">
+        <img src="assets/stone-sword/clay-09.jpg" alt="Stone Sword — solid / clay render" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/clay-10.jpg" data-od-id="ss-clay-10" aria-label="Open Stone Sword clay render 10">
+        <img src="assets/stone-sword/clay-10.jpg" alt="Stone Sword — solid / clay render" loading="lazy">
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Wireframe -->
+<section class="media-section reveal" data-od-id="section-wireframe">
+  <div class="container-narrow">
+    <div class="section-head">
+      <h2 class="section-title" data-od-id="wireframe-title">Wireframe</h2>
+      <p class="section-subtitle" data-od-id="wireframe-subtitle">Topology overview</p>
+    </div>
+    <div class="media-grid" data-gallery="wireframe" data-od-id="wireframe-gallery">
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/wire-01.jpg" data-od-id="ss-wire-1" aria-label="Open Stone Sword wireframe 1">
+        <img src="assets/stone-sword/wire-01.jpg" alt="Stone Sword — wireframe topology">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/wire-02.jpg" data-od-id="ss-wire-2" aria-label="Open Stone Sword wireframe 2">
+        <img src="assets/stone-sword/wire-02.jpg" alt="Stone Sword — wireframe topology" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/wire-03.jpg" data-od-id="ss-wire-3" aria-label="Open Stone Sword wireframe 3">
+        <img src="assets/stone-sword/wire-03.jpg" alt="Stone Sword — wireframe topology" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/wire-04.jpg" data-od-id="ss-wire-4" aria-label="Open Stone Sword wireframe 4">
+        <img src="assets/stone-sword/wire-04.jpg" alt="Stone Sword — wireframe topology" loading="lazy">
+      </button>
+      <button class="media-tile" type="button" data-lightbox data-src="assets/stone-sword/wire-05.jpg" data-od-id="ss-wire-5" aria-label="Open Stone Sword wireframe 5">
+        <img src="assets/stone-sword/wire-05.jpg" alt="Stone Sword — wireframe topology" loading="lazy">
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Material breakdown -->
+<section class="media-section reveal" data-od-id="section-materials">
+  <div class="container-narrow">
+    <div class="section-head">
+      <h2 class="section-title" data-od-id="materials-title">Material Breakdown</h2>
+      <p class="section-subtitle" data-od-id="materials-subtitle">PBR Texture Maps</p>
+    </div>
+    <div class="texture-grid" data-gallery="materials" data-od-id="materials-gallery">
+      <figure class="texture-card" data-od-id="mat-base-color">
+        <button class="texture-tile" type="button" data-lightbox data-src="assets/stone-sword/mat-base-color.jpg" aria-label="Open Base Color map">
+          <img src="assets/stone-sword/mat-base-color.jpg" alt="Stone Sword — base color map">
+        </button>
+        <figcaption class="texture-label">Base Color</figcaption>
+      </figure>
+      <figure class="texture-card" data-od-id="mat-metalness">
+        <button class="texture-tile" type="button" data-lightbox data-src="assets/stone-sword/mat-metalness.jpg" aria-label="Open Metalness map">
+          <img src="assets/stone-sword/mat-metalness.jpg" alt="Stone Sword — metalness map" loading="lazy">
+        </button>
+        <figcaption class="texture-label">Metalness</figcaption>
+      </figure>
+      <figure class="texture-card" data-od-id="mat-height">
+        <button class="texture-tile" type="button" data-lightbox data-src="assets/stone-sword/mat-height.jpg" aria-label="Open Height map">
+          <img src="assets/stone-sword/mat-height.jpg" alt="Stone Sword — height map" loading="lazy">
+        </button>
+        <figcaption class="texture-label">Height</figcaption>
+      </figure>
+      <figure class="texture-card" data-od-id="mat-ao">
+        <button class="texture-tile" type="button" data-lightbox data-src="assets/stone-sword/mat-ao.jpg" aria-label="Open Ambient Occlusion map">
+          <img src="assets/stone-sword/mat-ao.jpg" alt="Stone Sword — ambient occlusion map" loading="lazy">
+        </button>
+        <figcaption class="texture-label">Ambient Occlusion</figcaption>
+      </figure>
+      <figure class="texture-card" data-od-id="mat-normal">
+        <button class="texture-tile" type="button" data-lightbox data-src="assets/stone-sword/mat-normal.jpg" aria-label="Open Normal map">
+          <img src="assets/stone-sword/mat-normal.jpg" alt="Stone Sword — normal map" loading="lazy">
+        </button>
+        <figcaption class="texture-label">Normal</figcaption>
+      </figure>
+      <figure class="texture-card" data-od-id="mat-normal-opengl">
+        <button class="texture-tile" type="button" data-lightbox data-src="assets/stone-sword/mat-normal-opengl.jpg" aria-label="Open Normal (OpenGL) map">
+          <img src="assets/stone-sword/mat-normal-opengl.jpg" alt="Stone Sword — normal map (OpenGL)" loading="lazy">
+        </button>
+        <figcaption class="texture-label">Normal (OpenGL)</figcaption>
+      </figure>
+      <figure class="texture-card" data-od-id="mat-roughness">
+        <button class="texture-tile" type="button" data-lightbox data-src="assets/stone-sword/mat-roughness.jpg" aria-label="Open Roughness map">
+          <img src="assets/stone-sword/mat-roughness.jpg" alt="Stone Sword — roughness map" loading="lazy">
+        </button>
+        <figcaption class="texture-label">Roughness</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="project-gallery-end"></div>
+
+<!-- Footer -->
+<footer class="footer" data-od-id="footer" id="contact">
+  <div class="container footer-inner">
+    <p>© 2026 <strong>MÁRK SZABÓ</strong> · 3D Artist</p>
+    <p class="footer-tag">Environment &amp; Hard Surface</p>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" data-od-id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-backdrop" data-close aria-label="Close viewer"></button>
+  <div class="lightbox-stage">
+    <img class="lightbox-img" alt="Stone Sword render">
+  </div>
+  <button class="lightbox-btn lightbox-prev" data-prev aria-label="Previous image">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <button class="lightbox-btn lightbox-next" data-next aria-label="Next image">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+  <button class="lightbox-close" data-close aria-label="Close viewer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <span class="lightbox-count" data-count aria-live="polite">1 / 5</span>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+var tiles = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]'));
+var lb = document.getElementById('lightbox');
+var lbImg = lb.querySelector('.lightbox-img');
+var lbCount = lb.querySelector('[data-count]');
+var groups = {};
+tiles.forEach(function (t) {
+  var g = t.closest('[data-gallery]') || document.body;
+  var key = g.dataset.gallery || 'all';
+  if (!groups[key]) groups[key] = [];
+  groups[key].push(t);
+  t.galleryKey = key;
+});
+var current = null;
+function openAt(tile) {
+  current = tile;
+  lbImg.style.opacity = '0';
+  lbImg.src = tile.getAttribute('data-src');
+  var list = groups[tile.galleryKey];
+  lbCount.textContent = (list.indexOf(tile) + 1) + ' / ' + list.length;
+  lb.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  lb.classList.remove('is-open');
+  document.body.style.overflow = '';
+  window.setTimeout(function () {
+    if (!lb.classList.contains('is-open')) lbImg.removeAttribute('src');
+  }, 260);
+}
+function step(d) {
+  var list = groups[current.galleryKey];
+  var i = list.indexOf(current);
+  openAt(list[(i + d + list.length) % list.length]);
+}
+lbImg.addEventListener('load', function () { lbImg.style.opacity = '1'; });
+tiles.forEach(function (t) {
+  t.addEventListener('click', function () { openAt(t); });
+});
+lb.querySelectorAll('[data-close]').forEach(function (el) {
+  el.addEventListener('click', closeLb);
+});
+lb.querySelector('[data-prev]').addEventListener('click', function () { step(-1); });
+lb.querySelector('[data-next]').addEventListener('click', function () { step(1); });
+document.addEventListener('keydown', function (e) {
+  if (!lb.classList.contains('is-open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+var io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (en) {
+    if (en.isIntersecting) {
+      en.target.classList.add('is-visible');
+      io.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+document.querySelectorAll('[data-stub]').forEach(function (a) {
+  a.addEventListener('click', function (e) { e.preventDefault(); });
+});
+</script>
+</body>
+</html>

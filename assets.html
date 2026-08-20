@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modular Ruined Building Kit — Márk Szabó · 3D Artist</title>
+<meta name="description" content="Modular Ruined Building Kit — modular environment assets for real-time environments by Márk Szabó.">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:oklch(0.146 0 0);
+  --surface:oklch(0.175 0 0);
+  --fg:oklch(0.95 0 0);
+  --muted:oklch(0.66 0 0);
+  --border:oklch(0.26 0 0);
+  --accent:oklch(0.565 0.208 27);
+  --accent-soft:oklch(0.68 0.19 27);
+  --font-display:"Space Grotesk","Segoe UI",Arial,sans-serif;
+  --font-body:"Inter","Segoe UI",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+figure{margin:0}
+::selection{background:var(--accent);color:#0b0b0b}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+#contact{scroll-margin-top:96px}
+
+/* ---------- Cinematic page transition ---------- */
+@view-transition{navigation:auto}
+::view-transition-root{background:oklch(0.146 0 0)}
+::view-transition-old(root){animation:vt-out .4s cubic-bezier(.3,.6,.2,1) both}
+::view-transition-new(root){animation:vt-in .4s cubic-bezier(.3,.6,.2,1) both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-8px) scale(.992)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(12px) scale(.992)}}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.01ms}
+}
+
+.container{max-width:1520px;margin:0 auto;padding:0 clamp(24px,4vw,72px)}
+.container-narrow{max-width:1200px;margin:0 auto;padding:0 clamp(24px,4vw,48px)}
+
+/* ---------- Navigation ---------- */
+.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border)}
+.nav-inner{height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-brand{display:flex;align-items:center;gap:14px;padding:6px 0}
+.nav-mark{width:9px;height:9px;background:var(--accent);flex:none}
+.nav-mark::after{content:"";display:block;width:17px;height:17px;margin:-4px 0 0 -4px;border:1px solid var(--accent);opacity:.45}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.2}
+.nav-name{font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.045em}
+.nav-role{font-family:var(--font-display);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.26em;color:var(--muted);margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:clamp(20px,3vw,46px);margin:0 auto}
+.nav-link{position:relative;font-family:var(--font-display);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:12px 2px;transition:color .25s}
+.nav-link:hover{color:var(--fg)}
+.nav-link.is-active{color:var(--fg)}
+.nav-link.is-active::after{content:"";position:absolute;left:2px;right:2px;bottom:4px;height:2px;background:var(--fg)}
+
+/* ---------- Project header ---------- */
+.project-header{padding:104px 0 0}
+.project-back{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:42px;transition:color .25s}
+.project-back:hover{color:var(--fg)}
+.project-back svg{width:15px;height:15px;transition:transform .25s}
+.project-back:hover svg{transform:translateX(-3px)}
+.project-title{font-family:var(--font-display);font-weight:600;font-size:clamp(44px,6vw,84px);line-height:1.05;letter-spacing:-.03em}
+.project-subtitle{font-family:var(--font-display);font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.24em;color:var(--muted);margin-top:20px}
+.project-description{font-size:15px;line-height:1.75;color:var(--muted);max-width:72ch;margin-top:26px}
+
+/* ---------- Media sections ---------- */
+.project-content{padding:88px 0 40px}
+.media-section{padding:0 0 40px}
+.section-head{margin-bottom:36px}
+.section-title{font-family:var(--font-display);font-weight:600;font-size:clamp(26px,3vw,36px);line-height:1.15;letter-spacing:-.015em}
+.hero-media{width:100%;height:auto;display:block;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+.media-caption{text-align:center;font-size:13px;letter-spacing:.02em;color:var(--muted);margin-top:16px}
+.project-gallery-end{padding-top:64px}
+
+/* ---------- Scroll reveal ---------- */
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+
+/* ---------- Footer ---------- */
+.footer{border-top:1px solid var(--border);padding:26px 0 30px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px;letter-spacing:.03em;color:var(--muted)}
+.footer-inner strong{font-weight:600;color:var(--fg);letter-spacing:.06em}
+.footer-tag{font-family:var(--font-display);font-size:10px;text-transform:uppercase;letter-spacing:.24em}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  .project-header{padding:84px 0 0}
+  .project-content{padding:72px 0 24px}
+}
+@media (max-width:680px){
+  .nav-inner{height:auto;flex-wrap:wrap;padding:14px 0 12px;row-gap:8px}
+  .nav-links{order:3;width:100%;justify-content:center;gap:30px}
+  .project-header{padding:64px 0 0}
+  .project-back{margin-bottom:34px}
+  .project-title{font-size:clamp(40px,12vw,56px);letter-spacing:-.02em}
+  .project-content{padding:56px 0 16px}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" data-od-id="nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="markszabo-portfolio.html" data-od-id="nav-brand">
+      <span class="nav-mark" aria-hidden="true"></span>
+      <span class="nav-brand-text">
+        <span class="nav-name">MÁRK SZABÓ</span>
+        <span class="nav-role">3D Artist</span>
+      </span>
+    </a>
+    <div class="nav-links" data-od-id="nav-links">
+      <a class="nav-link" href="markszabo-portfolio.html" data-od-id="nav-link-home">Home</a>
+      <a class="nav-link is-active" href="work.html" data-od-id="nav-link-work">Work</a>
+      <a class="nav-link" href="markszabo-portfolio.html#about" data-od-id="nav-link-about">About</a>
+      <a class="nav-link" href="contact.html" data-od-id="nav-link-contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Project header -->
+<header class="project-header reveal" data-od-id="project-header">
+  <div class="container">
+    <a class="project-back" href="work.html" data-od-id="back-to-work">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8H3M7 3.5L2.5 8 7 12.5"/></svg>
+      All Projects
+    </a>
+    <h1 class="project-title" data-od-id="project-title">MODULAR RUINED BUILDING KIT</h1>
+    <p class="project-subtitle" data-od-id="project-subtitle">Modular Environment Assets</p>
+    <p class="project-description" data-od-id="project-description">A collection of modular ruined building assets created for real-time environments. The kit includes damaged walls, structural elements, floor pieces, and debris designed for flexible level construction. The assets were created with a game-ready workflow, optimized topology, and reusable modular design for Unreal Engine environments.</p>
+  </div>
+</header>
+
+<!-- Media sections -->
+<main class="project-content" data-od-id="project-content">
+
+  <section class="media-section reveal" data-od-id="section-overview">
+    <div class="container-narrow">
+      <div class="section-head">
+        <h2 class="section-title" data-od-id="overview-title">Asset Overview</h2>
+      </div>
+      <figure>
+        <img class="hero-media" data-od-id="overview-image" src="assets/assets/overview.jpg" alt="Modular ruined building kit — complete modular asset collection">
+        <figcaption class="media-caption" data-od-id="overview-caption">Complete modular asset collection.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+<div class="project-gallery-end"></div>
+
+<!-- Footer -->
+<footer class="footer" data-od-id="footer" id="contact">
+  <div class="container footer-inner">
+    <p>© 2026 <strong>MÁRK SZABÓ</strong> · 3D Artist</p>
+    <p class="footer-tag">Environment &amp; Hard Surface</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+var io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (en) {
+    if (en.isIntersecting) {
+      en.target.classList.add('is-visible');
+      io.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+</script>
+</body>
+</html>

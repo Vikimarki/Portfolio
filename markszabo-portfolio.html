@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Márk Szabó — 3D Artist · Environment &amp; Hard Surface</title>
+<meta name="description" content="Márk Szabó — AAA environment and hard surface 3D artist. Cinematic environments, hard-surface assets and game scenes for production.">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:oklch(0.146 0 0);
+  --surface:oklch(0.175 0 0);
+  --fg:oklch(0.95 0 0);
+  --muted:oklch(0.66 0 0);
+  --border:oklch(0.26 0 0);
+  --accent:oklch(0.565 0.208 27);
+  --accent-soft:oklch(0.68 0.19 27);
+  --font-display:"Space Grotesk","Segoe UI",Arial,sans-serif;
+  --font-body:"Inter","Segoe UI",Arial,sans-serif;
+  --font-sign:"Caveat","Segoe Script","Segoe UI",cursive;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#0b0b0b}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+#about,#contact{scroll-margin-top:96px}
+
+/* ---------- Cinematic page transition ---------- */
+@view-transition{navigation:auto}
+::view-transition-root{background:oklch(0.146 0 0)}
+::view-transition-old(root){animation:vt-out .4s cubic-bezier(.3,.6,.2,1) both}
+::view-transition-new(root){animation:vt-in .4s cubic-bezier(.3,.6,.2,1) both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-8px) scale(.992)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(12px) scale(.992)}}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.01ms}
+}
+
+.container{max-width:1520px;margin:0 auto;padding:0 clamp(24px,4vw,72px)}
+
+/* ---------- Navigation ---------- */
+.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border)}
+.nav-inner{height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-brand{display:flex;align-items:center;gap:14px;padding:6px 0}
+.nav-mark{width:9px;height:9px;background:var(--accent);flex:none}
+.nav-mark::after{content:"";display:block;width:17px;height:17px;margin:-4px 0 0 -4px;border:1px solid var(--accent);opacity:.45}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.2}
+.nav-name{font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.045em}
+.nav-role{font-family:var(--font-display);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.26em;color:var(--muted);margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:clamp(20px,3vw,46px);margin:0 auto}
+.nav-link{position:relative;font-family:var(--font-display);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:12px 2px;transition:color .3s cubic-bezier(.2,.65,.2,1)}
+.nav-link:hover{color:var(--fg)}
+.nav-link.is-active{color:var(--fg);text-shadow:0 0 14px oklch(0.95 0 0 / 0.32)}
+.nav-link.is-active::after{content:"";position:absolute;left:2px;right:2px;bottom:4px;height:2px;background:var(--fg)}
+.nav-actions{display:flex;align-items:center;gap:2px}
+.nav-action{display:grid;place-items:center;width:44px;height:44px;color:var(--muted);border:1px solid transparent;border-radius:2px;transition:color .3s cubic-bezier(.2,.65,.2,1),border-color .3s cubic-bezier(.2,.65,.2,1),background .3s cubic-bezier(.2,.65,.2,1)}
+.nav-action:hover{color:var(--fg);border-color:var(--border);background:var(--surface)}
+.nav-action svg{width:17px;height:17px}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:calc(100svh - 82px);overflow:hidden}
+.hero-bg{position:absolute;inset:0;will-change:transform}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:70% 45%;opacity:.5}
+.hero-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,var(--bg) 28%,oklch(0.146 0 0 / 0) 60%)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,oklch(0.146 0 0 / 0.65) 0%,oklch(0.146 0 0 / 0) 30%,oklch(0.146 0 0 / 0.15) 78%,var(--bg) 100%)}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,40fr) minmax(0,60fr);min-height:calc(100svh - 82px)}
+
+.hero-content{display:flex;flex-direction:column;justify-content:center;padding:88px 0 96px;max-width:600px}
+.kicker{font-family:var(--font-display);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.4em;color:var(--accent-soft);margin-bottom:30px}
+.hero-title{font-family:var(--font-display);font-weight:600;font-size:clamp(58px,7.4vw,122px);line-height:1.04;letter-spacing:-.03em;margin-bottom:34px}
+.hero-title span{display:block}
+.hero-lead{font-size:17px;line-height:1.6;color:var(--fg);max-width:46ch;margin-bottom:20px}
+.hero-body{font-size:15px;line-height:1.76;color:var(--muted);max-width:50ch;margin-bottom:48px}
+.hero-cta{display:flex;align-items:center;gap:30px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:11px;font-family:var(--font-display);font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;padding:17px 34px;border-radius:2px;transition:background .3s cubic-bezier(.2,.65,.2,1),color .3s cubic-bezier(.2,.65,.2,1),border-color .3s cubic-bezier(.2,.65,.2,1),transform .3s cubic-bezier(.2,.65,.2,1)}
+.btn-primary{color:var(--fg);border:1px solid var(--fg);background:transparent;transition:background .3s cubic-bezier(.2,.65,.2,1),color .3s cubic-bezier(.2,.65,.2,1),border-color .3s cubic-bezier(.2,.65,.2,1),transform .3s cubic-bezier(.2,.65,.2,1)}
+.btn-primary:hover{background:var(--fg);color:var(--bg);border-color:var(--fg);transform:translateY(-2px)}
+.btn-primary:active{transform:translateY(1px) scale(.98);transition:transform .18s cubic-bezier(.2,.7,.2,1)}
+.btn-primary svg{width:15px;height:15px;flex:none;transition:transform .3s cubic-bezier(.2,.65,.2,1)}
+.btn-primary:hover svg{transform:translateX(5px)}
+.btn-secondary{color:var(--muted);padding:17px 2px;letter-spacing:.16em;border-bottom:1px solid var(--border);border-radius:0;transition:color .3s cubic-bezier(.2,.65,.2,1),border-color .3s cubic-bezier(.2,.65,.2,1)}
+.btn-secondary:hover{color:var(--fg);border-bottom-color:var(--fg)}
+
+.hero-visual{position:relative}
+.portrait-wrap{position:absolute;inset:0}
+.portrait{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 26%;
+  -webkit-mask-image:radial-gradient(128% 112% at 50% 42%,#000 50%,transparent 96%);
+          mask-image:radial-gradient(128% 112% at 50% 42%,#000 50%,transparent 96%);
+  animation:portraitIn .8s cubic-bezier(.2,.6,.2,1) .25s both}
+@keyframes portraitIn{from{opacity:0}to{opacity:1}}
+.portrait-fade{position:absolute;inset:0;background:radial-gradient(128% 112% at 50% 42%,oklch(0.05 0 0 / 0) 48%,oklch(0.03 0 0 / 0.55) 76%,var(--bg) 100%)}
+.portrait-glow{position:absolute;right:-12%;bottom:-14%;width:72%;height:62%;background:radial-gradient(closest-side,var(--accent),transparent 72%);opacity:.13;filter:blur(34px);pointer-events:none}
+
+.animate{opacity:0;transform:translateY(18px);animation:fadeUp .85s cubic-bezier(.2,.6,.2,1) forwards}
+.animate.d1{animation-delay:.1s}
+.animate.d2{animation-delay:.2s}
+.animate.d3{animation-delay:.3s}
+.animate.d4{animation-delay:.4s}
+.animate.d5{animation-delay:.5s}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+.js .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
+.js .reveal.is-visible{opacity:1;transform:none}
+.reveal.r1{transition-delay:.05s}
+.reveal.r2{transition-delay:.14s}
+.reveal.r3{transition-delay:.24s}
+.reveal.r4{transition-delay:.34s}
+@media (prefers-reduced-motion:reduce){
+  .animate{opacity:1;transform:none;animation:none}
+  .btn,.btn svg,.nav-link,.nav-action{transition:none}
+  .portrait{animation:none}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- Divider + Bottom ---------- */
+.divider{height:1px;background:var(--border)}
+.section-bottom{background:var(--bg)}
+.bottom-grid{display:grid;grid-template-columns:minmax(0,40fr) minmax(0,60fr);gap:clamp(48px,6vw,120px);padding:112px 0 128px}
+
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:58px 52px;align-content:start}
+.stat{display:flex;flex-direction:column;gap:18px}
+.stat-icon{color:var(--muted);width:30px;height:30px}
+.stat-icon svg{width:24px;height:24px}
+.stat-num{font-family:var(--font-display);font-weight:600;font-size:clamp(40px,3.6vw,60px);line-height:1;letter-spacing:-.02em;color:var(--fg)}
+.stat-label{font-family:var(--font-display);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.24em;color:var(--muted)}
+
+.about{display:flex;flex-direction:column;max-width:620px}
+.about-kicker{margin-bottom:32px}
+.about-p{font-size:15.5px;line-height:1.82;color:var(--muted);max-width:58ch;margin-bottom:24px}
+.about-p strong{color:var(--fg);font-weight:500}
+.signature{font-family:var(--font-sign);font-weight:600;font-size:46px;line-height:1;color:var(--accent);margin-top:14px}
+
+/* ---------- Footer ---------- */
+.footer{border-top:1px solid var(--border);padding:26px 0 30px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px;letter-spacing:.03em;color:var(--muted)}
+.footer-inner strong{font-weight:600;color:var(--fg);letter-spacing:.06em}
+.footer-tag{font-family:var(--font-display);font-size:10px;text-transform:uppercase;letter-spacing:.24em}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  .hero{min-height:auto}
+  .hero-grid{grid-template-columns:1fr;min-height:auto}
+  .hero-content{padding:76px 0 52px;max-width:640px}
+  .hero-visual{height:min(84svh,720px);min-height:480px;margin-bottom:1px}
+  .bottom-grid{grid-template-columns:1fr;gap:72px;padding:84px 0 100px}
+  .stats{max-width:640px}
+}
+@media (max-width:680px){
+  .nav-inner{height:auto;flex-wrap:wrap;padding:14px 0 12px;row-gap:8px}
+  .nav-links{order:3;width:100%;justify-content:center;gap:30px}
+  .nav-actions{gap:2px}
+  .hero-content{padding:64px 0 44px}
+  .hero-title{font-size:clamp(44px,14vw,66px);letter-spacing:-.02em}
+  .hero-lead{font-size:16px}
+  .hero-cta{gap:22px}
+  .btn-primary{padding:16px 26px}
+  .hero-visual{height:min(78svh,560px)}
+  .stats{grid-template-columns:1fr;gap:42px}
+  .bottom-grid{padding:72px 0 88px}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" data-od-id="nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="#hero" data-od-id="nav-brand">
+      <span class="nav-mark" aria-hidden="true"></span>
+      <span class="nav-brand-text">
+        <span class="nav-name">MÁRK SZABÓ</span>
+        <span class="nav-role">3D Artist</span>
+      </span>
+    </a>
+    <div class="nav-links" data-od-id="nav-links">
+      <a class="nav-link is-active" href="#hero" data-od-id="nav-link-home">Home</a>
+      <a class="nav-link" href="work.html" data-od-id="nav-link-work">Work</a>
+      <a class="nav-link" href="#about" data-od-id="nav-link-about">About</a>
+      <a class="nav-link" href="contact.html" data-od-id="nav-link-contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero" data-od-id="hero" id="hero">
+  <div class="hero-bg" data-od-id="hero-bg" aria-hidden="true">
+    <img src="assets/scene.jpg" alt="">
+  </div>
+  <div class="container hero-grid">
+    <div class="hero-content" data-od-id="hero-content">
+      <p class="kicker animate" data-od-id="hero-kicker">3D Artist</p>
+      <h1 class="hero-title animate d1" data-od-id="hero-title">
+        <span>MÁRK</span>
+        <span>SZABÓ</span>
+      </h1>
+      <p class="hero-lead animate d2" data-od-id="hero-intro">I create realistic environments, hard-surface assets and cinematic scenes for games.</p>
+      <p class="hero-body animate d3" data-od-id="hero-paragraph">My work sits at the intersection of atmosphere and craft — from gritty industrial streetscapes to clean hero props. I handle the full pipeline: blockout, high-poly and hard-surface modelling, texturing, lighting and final real-time presentation, tuned for fidelity and performance.</p>
+      <div class="hero-cta animate d4" data-od-id="hero-cta">
+        <a class="btn btn-primary" href="work.html" data-od-id="cta-primary">View My Work
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>
+        </a>
+        <a class="btn btn-secondary" href="contact.html" data-od-id="cta-secondary">Contact Me</a>
+      </div>
+    </div>
+    <div class="hero-visual" data-od-id="hero-visual">
+      <div class="portrait-wrap">
+        <img class="portrait" src="assets/portrait.png" alt="Márk Szabó — 3D artist portrait">
+        <div class="portrait-fade" aria-hidden="true"></div>
+      </div>
+      <div class="portrait-glow" aria-hidden="true"></div>
+    </div>
+  </div>
+</header>
+
+<!-- Divider -->
+<div class="divider" data-od-id="divider"></div>
+
+<!-- Stats + About -->
+<section class="section-bottom" data-od-id="stats-about" id="about">
+  <div class="container bottom-grid">
+    <div class="stats reveal" data-od-id="stats">
+      <div class="stat" data-od-id="stat-years">
+        <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3L21 12 12 21 3 12z"/><path d="M12 7.5l3.5 3.5-3.5 3.5-3.5-3.5z"/></svg></span>
+        <span class="stat-num">Junior</span>
+        <span class="stat-label">Game Artist</span>
+      </div>
+      <div class="stat" data-od-id="stat-projects">
+        <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2.8l8 4.6v9.2l-8 4.6-8-4.6V7.4l8-4.6z"/><path d="M12 12.2v9M12 12.2L4 7.6M12 12.2l8-4.6"/></svg></span>
+        <span class="stat-num">8+</span>
+        <span class="stat-label">Personal Projects</span>
+      </div>
+      <div class="stat" data-od-id="stat-aaa">
+        <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="7"/><path d="M12 2v3.5M12 18.5V22M2 12h3.5M18.5 12H22"/></svg></span>
+        <span class="stat-num">AAA</span>
+        <span class="stat-label">Quality Focus</span>
+      </div>
+      <div class="stat" data-od-id="stat-passion">
+        <span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Passion</span>
+      </div>
+    </div>
+    <div class="about" data-od-id="about">
+      <p class="kicker about-kicker reveal r1" data-od-id="about-title">About Me</p>
+      <p class="about-p reveal r2" data-od-id="about-paragraph-one"><strong>I'm Márk</strong>, a 3D artist specialising in environments and hard-surface design for AAA game productions. I care about the details most players never notice — the way metal wears, how fog holds a streetlight, how light falls across a wall that has seen weather.</p>
+      <p class="about-p reveal r3" data-od-id="about-paragraph-two">Every asset I build is made with a production mindset: clean topology, smart texture use and optimisation that survives contact with a real engine. The result is work that reads as both cinematic and technically reliable.</p>
+      <p class="signature reveal r4" data-od-id="signature">Márk Szabó</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" data-od-id="footer" id="contact">
+  <div class="container footer-inner">
+    <p>© 2026 <strong>MÁRK SZABÓ</strong> · 3D Artist</p>
+    <p class="footer-tag">Environment &amp; Hard Surface</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+var heroBg = document.querySelector('.hero-bg');
+if (heroBg && !reduceMotion.matches) {
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        heroBg.style.transform = 'translateY(' + ((window.scrollY || 0) * 0.15) + 'px)';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+var io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (en) {
+    if (en.isIntersecting) {
+      en.target.classList.add('is-visible');
+      io.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+document.querySelectorAll('[data-stub]').forEach(function (a) {
+  a.addEventListener('click', function (e) { e.preventDefault(); });
+});
+</script>
+</body>
+</html>

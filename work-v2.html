@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Márk Szabó · 3D Artist</title>
+<meta name="description" content="Selected projects by Márk Szabó — AAA environment and hard surface work for games.">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:oklch(0.146 0 0);
+  --surface:oklch(0.175 0 0);
+  --fg:oklch(0.95 0 0);
+  --muted:oklch(0.66 0 0);
+  --border:oklch(0.26 0 0);
+  --accent:oklch(0.565 0.208 27);
+  --accent-soft:oklch(0.68 0.19 27);
+  --font-display:"Space Grotesk","Segoe UI",Arial,sans-serif;
+  --font-body:"Inter","Segoe UI",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#0b0b0b}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+#contact{scroll-margin-top:96px}
+
+/* ---------- Cinematic page transition ---------- */
+@view-transition{navigation:auto}
+::view-transition-root{background:oklch(0.146 0 0)}
+::view-transition-old(root){animation:vt-out .6s ease-in-out both}
+::view-transition-new(root){animation:vt-in .6s ease-in-out both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-24px)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(24px)}}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.01ms}
+}
+
+.container{max-width:1520px;margin:0 auto;padding:0 clamp(24px,4vw,72px)}
+
+/* ---------- Navigation ---------- */
+.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border)}
+.nav-inner{height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-brand{display:flex;align-items:center;gap:14px;padding:6px 0}
+.nav-mark{width:9px;height:9px;background:var(--accent);flex:none}
+.nav-mark::after{content:"";display:block;width:17px;height:17px;margin:-4px 0 0 -4px;border:1px solid var(--accent);opacity:.45}
+.nav-brand-text{display:flex;flex-direction:column;line-height:1.2}
+.nav-name{font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.045em}
+.nav-role{font-family:var(--font-display);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.26em;color:var(--muted);margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:clamp(20px,3vw,46px);margin:0 auto}
+.nav-link{position:relative;font-family:var(--font-display);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:12px 2px;transition:color .3s cubic-bezier(.2,.65,.2,1)}
+.nav-link:hover{color:var(--fg)}
+.nav-link.is-active{color:var(--fg);text-shadow:0 0 14px oklch(0.95 0 0 / 0.32)}
+.nav-link.is-active::after{content:"";position:absolute;left:2px;right:2px;bottom:4px;height:2px;background:var(--fg)}
+.nav-actions{display:flex;align-items:center;gap:2px}
+.nav-action{display:grid;place-items:center;width:44px;height:44px;color:var(--muted);border:1px solid transparent;border-radius:2px;transition:color .25s,border-color .25s,background .25s}
+.nav-action:hover{color:var(--fg);border-color:var(--border);background:var(--surface)}
+.nav-action svg{width:17px;height:17px}
+
+/* ---------- Page header ---------- */
+.work-header{padding:104px 0 64px}
+.kicker{font-family:var(--font-display);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.4em;color:var(--accent-soft);margin-bottom:22px}
+.work-title{font-family:var(--font-display);font-weight:600;font-size:clamp(38px,4.6vw,60px);line-height:1.1;letter-spacing:-.02em;margin-bottom:18px}
+.work-meta{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap}
+.work-intro{font-size:15px;line-height:1.7;color:var(--muted);max-width:56ch}
+.work-count{font-family:var(--font-display);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.24em;color:var(--muted);margin-left:auto}
+
+/* ---------- Project grid ---------- */
+.work-grid{padding:8px 0 128px}
+.grid-inner{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.project-card{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:10px;background:var(--bg);overflow:hidden;transition:border-color .3s ease-out,background .3s ease-out,transform .3s ease-out}
+.project-card:hover{border-color:oklch(0.52 0.13 27);background:var(--surface);transform:translateY(-2px)}
+.project-card:focus-visible{outline-offset:3px}
+.project-media{position:relative;aspect-ratio:4/3;overflow:hidden;border-bottom:1px solid var(--border);background:var(--surface)}
+.project-media img{width:100%;height:100%;object-fit:cover;object-position:center center;transition:transform .3s ease-out}
+.project-card[data-od-id="work-card-hk-aerial"] .project-media img{object-position:50% 50%}
+.project-card:hover .project-media img{transform:scale(1.03)}
+.project-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:var(--surface)}
+.project-placeholder svg{width:22px;height:22px;color:var(--muted)}
+.project-placeholder span{font-family:var(--font-display);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.26em;color:var(--muted)}
+.project-body{display:flex;flex-direction:column;flex:1;padding:20px 22px 22px}
+.project-title{font-family:var(--font-display);font-weight:600;font-size:18px;line-height:1.3;letter-spacing:.005em;color:var(--fg)}
+.project-category{font-family:var(--font-display);font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.22em;color:var(--muted);margin-top:8px}
+.project-link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:20px;font-family:var(--font-display);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);transition:color .3s ease-out}
+.project-link svg{width:14px;height:14px;transition:transform .3s ease-out}
+.project-card:hover .project-link{color:var(--accent-soft)}
+.project-card:hover .project-link svg{transform:translateX(4px)}
+
+/* ---------- Footer ---------- */
+.footer{border-top:1px solid var(--border);padding:26px 0 30px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px;letter-spacing:.03em;color:var(--muted)}
+.footer-inner strong{font-weight:600;color:var(--fg);letter-spacing:.06em}
+.footer-tag{font-family:var(--font-display);font-size:10px;text-transform:uppercase;letter-spacing:.24em}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1120px){
+  .work-header{padding:80px 0 48px}
+  .grid-inner{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+  .work-grid{padding-bottom:100px}
+}
+@media (max-width:680px){
+  .nav-inner{height:auto;flex-wrap:wrap;padding:14px 0 12px;row-gap:8px}
+  .nav-links{order:3;width:100%;justify-content:center;gap:30px}
+  .nav-actions{gap:2px}
+  .work-header{padding:64px 0 40px}
+  .grid-inner{grid-template-columns:1fr;gap:20px}
+  .work-grid{padding-bottom:80px}
+  .work-count{margin-left:0}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" data-od-id="nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="markszabo-portfolio.html" data-od-id="nav-brand">
+      <span class="nav-mark" aria-hidden="true"></span>
+      <span class="nav-brand-text">
+        <span class="nav-name">MÁRK SZABÓ</span>
+        <span class="nav-role">3D Artist</span>
+      </span>
+    </a>
+    <div class="nav-links" data-od-id="nav-links">
+      <a class="nav-link" href="markszabo-portfolio.html" data-od-id="nav-link-home">Home</a>
+      <a class="nav-link is-active" href="work.html" data-od-id="nav-link-work">Work</a>
+      <a class="nav-link" href="markszabo-portfolio.html#about" data-od-id="nav-link-about">About</a>
+      <a class="nav-link" href="contact.html" data-od-id="nav-link-contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page header -->
+<header class="work-header" data-od-id="work-header">
+  <div class="container">
+    <p class="kicker" data-od-id="work-kicker">Work</p>
+    <h1 class="work-title" data-od-id="work-title">Selected Projects</h1>
+    <div class="work-meta">
+      <p class="work-intro" data-od-id="work-intro">Game weapons, vehicles, hard-surface props and environments — each project is presented as its own case study.</p>
+      <p class="work-count" data-od-id="work-count">08 Projects</p>
+    </div>
+  </div>
+</header>
+
+<!-- Project index -->
+<section class="work-grid" data-od-id="work-grid">
+  <div class="container grid-inner">
+
+    <a class="project-card" href="rune-sword.html" data-od-id="work-card-rune-sword">
+      <div class="project-media">
+        <img src="assets/rune-sword/rune-sword-01.jpg" alt="Rune Sword — game weapon preview" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-od-id="work-card-rune-sword-title">Rune Sword</div>
+        <div class="project-category" data-od-id="work-card-rune-sword-category">Game Weapon</div>
+        <div class="project-link" data-od-id="work-card-rune-sword-link">View Project
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="stone-sword.html" data-od-id="work-card-stone-sword">
+      <div class="project-media">
+        <img src="assets/stone-sword/stone-sword-01.jpg" alt="Stone Sword — game weapon preview" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-od-id="work-card-stone-sword-title">Stone Sword</div>
+        <div class="project-category" data-od-id="work-card-stone-sword-category">Game Weapon</div>
+        <div class="project-link" data-od-id="work-card-stone-sword-link">View Project
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="hk-aerial.html" data-od-id="work-card-hk-aerial">
+      <div class="project-media">
+        <img src="assets/work/hk-aerial-cover.jpg" alt="HK Aerial — vehicle preview" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-od-id="work-card-hk-aerial-title">HK Aerial</div>
+        <div class="project-category" data-od-id="work-card-hk-aerial-category">Vehicle</div>
+        <div class="project-link" data-od-id="work-card-hk-aerial-link">View Project
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="sci-fi-weapon.html" data-od-id="work-card-sci-fi-weapon">
+      <div class="project-media">
+        <img src="assets/sci-fi-weapon/assault-rifle-01.jpg" alt="Sci-Fi Weapon — game weapon preview" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-od-id="work-card-sci-fi-weapon-title">Sci-Fi Weapon</div>
+        <div class="project-category" data-od-id="work-card-sci-fi-weapon-category">Weapon</div>
+        <div class="project-link" data-od-id="work-card-sci-fi-weapon-link">View Project
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="cars.html" data-od-id="work-card-cars">
+      <div class="project-media">
+        <img src="assets/work/cars-cover.jpg" alt="Cars — vehicles preview" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-od-id="work-card-cars-title">Cars</div>
+        <div class="project-category" data-od-id="work-card-cars-category">Vehicles</div>
+        <div class="project-link" data-od-id="work-card-cars-link">View Project
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="robots.html" data-od-id="work-card-robots">
+      <div class="project-media">
+        <img src="assets/robots/textured-01.jpg" alt="Robots — hard surface preview" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-od-id="work-card-robots-title">Robots</div>
+        <div class="project-category" data-od-id="work-card-robots-category">Hard Surface</div>
+        <div class="project-link" data-od-id="work-card-robots-link">View Project
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="cities.html" data-od-id="work-card-cities">
+      <div class="project-media">
+        <img src="assets/cities/environment-01.jpg" alt="Cities — environment preview" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-od-id="work-card-cities-title">Cities</div>
+        <div class="project-category" data-od-id="work-card-cities-category">Environment</div>
+        <div class="project-link" data-od-id="work-card-cities-link">View Project
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="assets.html" data-od-id="work-card-assets">
+      <div class="project-media">
+        <img src="assets/assets/overview.jpg" alt="Assets — modular environment preview" loading="lazy">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-od-id="work-card-assets-title">Assets</div>
+        <div class="project-category" data-od-id="work-card-assets-category">Modular Environment Assets</div>
+        <div class="project-link" data-od-id="work-card-assets-link">View Project
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" data-od-id="footer" id="contact">
+  <div class="container footer-inner">
+    <p>© 2026 <strong>MÁRK SZABÓ</strong> · 3D Artist</p>
+    <p class="footer-tag">Environment &amp; Hard Surface</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('[data-stub]').forEach(function (a) {
+  a.addEventListener('click', function (e) { e.preventDefault(); });
+});
+</script>
+</body>
+</html>
